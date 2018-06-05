@@ -35,13 +35,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">@guest
                     @else
-                    <li><a href="{{ route('user.index') }}">User</a></li>
-                    <li><a href="{{ route('member.index') }}">Member</a></li>
-                    <li><a href="{{ route('perusahaan.index') }}">Perusahaan</a></li>
-                    <li><a href="{{ route('lowongan.index') }}">Lowongan</a></li>
-                    <li><a href="{{ route('lamaran.index') }}">Lamaran</a></li>
+                    <li><a class="navbar" href="{{ route('user.index') }}">User</a></li>
+                    <li><a class="navbar" href="{{ route('member.index') }}">Member</a></li>
+                    <li><a class="navbar" href="{{ route('perusahaan.index') }}">Perusahaan</a></li>
+                    <li><a class="navbar" href="{{ route('lowongan.index') }}">Lowongan</a></li>
+                    <li><a class="navbar" href="{{ route('lamaran.index') }}">Lamaran</a></li>
                     @endguest
                     </ul>
+                   
                     
 
                     <!-- Right Side Of Navbar -->

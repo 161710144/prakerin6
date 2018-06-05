@@ -1,8 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 	<div class="row">
 	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#">Home</a>
+			</li>
+			<li class="breadcrumb-item active">Member
+			</li>
+		</ol>
 	<div class="col-md-16">
 			<div class="panel panel-danger">
 			  <div class="panel-heading"><font color ="blue">User Data</font>

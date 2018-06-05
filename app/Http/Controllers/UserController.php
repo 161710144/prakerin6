@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Session;
 
 class UserController extends Controller
 {
@@ -84,15 +85,19 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required|max:255',
-            'email' => 'required|max:255',
-            'password' => 'required|min:5'
+            'name' => 'required|',
+            'email' => 'required|',
+            'password' => 'required|'
         ]);
         $us = User::findOrFail($id);
         $us->name = $request->name;
         $us->email = $request->email;
         $us->password = $request->password;
-        
+        $us->save();
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil mengedit <b>$us->name</b>"
+        ]);
         return redirect()->route('user.index');
     }
 
@@ -106,10 +111,6 @@ class UserController extends Controller
     {
         $us = User::findOrFail($id);
         $us->delete();
-        session::flash("flash_notification", [
-        "level"=>"success",
-        "message"=>"Data Berhasil dihapus"
-        ]);
         return redirect()->route('user.index');
     }
 }

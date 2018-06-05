@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Perusahaan;
+use App\User;
+use Session;
 use Illuminate\Http\Request;
 
 class PerusahaanController extends Controller
@@ -14,7 +16,7 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
-        $per = Perusahaan::with('member')->get();
+        $per = Perusahaan::with('User')->get();
         return view('perusahaan.index',compact('per'));
     }
 
@@ -25,8 +27,8 @@ class PerusahaanController extends Controller
      */
     public function create()
     {
-        $mem = Member::all();
-        return view('perusahaan.create',compact('mem'));
+        $per = User::all();
+        return view('perusahaan.create',compact('per'));
     }
 
     /**
@@ -43,11 +45,11 @@ class PerusahaanController extends Controller
             'kategori' => 'required|max:115',
             'subkategori' => 'required|max:115',
             'judul' => 'required|max:50',
-            'gaji' => 'required|number',
+            'gaji' => 'required|',
             'tgl_mulai' => 'required|',
             'email' => 'required|unique:perusahaans',
             'telepon' => 'required|',
-            'user_id' => 'required|unique:members'
+            'user_id' => 'required|'
         ]);
         $per = new Perusahaan;
         $per->logo = $request->logo;

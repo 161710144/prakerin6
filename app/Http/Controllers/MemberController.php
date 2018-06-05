@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\User;
 use App\Member;
 use Illuminate\Http\Request;
 
@@ -14,8 +16,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $mem  = Member::all();
-        return view('member.index', compact('mem'));
+         $mem = Member::with('User')->get();
+        return view('member.index',compact('mem'));
     }
 
     /**
@@ -25,7 +27,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('member.create');
+        $us = User::all();
+        return view('member.create',compact('us'));
     }
 
     /**
@@ -36,7 +39,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+       $this->validate($request,[
             'foto' => 'required|',
             'alamat' => 'required|',
             'user_id' => 'required'
@@ -71,7 +74,7 @@ class MemberController extends Controller
      * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function edit(Member $member)
+    public function edit($id)
     {
         $mem = Member::findOrFail($id);
         $us = User::all();
@@ -86,7 +89,7 @@ class MemberController extends Controller
      * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(Request $request,$id)
     {
         $this->validate($request,[
             'foto' => 'required|',
@@ -111,9 +114,9 @@ class MemberController extends Controller
      * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        $mem = Member::findOrFail($id);
+        $mem = Member::FindOrFail($id);
         $mem->delete();
         Session::flash("flash_notification", [
         "level"=>"success",
@@ -121,4 +124,5 @@ class MemberController extends Controller
         ]);
         return redirect()->route('member.index');
     }
+
 }

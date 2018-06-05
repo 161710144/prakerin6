@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user','UserController');
 Route::resource('member','MemberController');
+Route::resource('perusahaan','PerusahaanController');
+Route::resource('lowongan','LowonganController');
+Route::resource('lamaran','LamaranController');
 
 Route::get('/cekuk', function () {
     return view('layouts.admin');

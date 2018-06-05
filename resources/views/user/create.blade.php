@@ -33,7 +33,7 @@
 
 			  		<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
 			  			<label class="control-label">Password</label>	
-			  			<input type="hidden" name="password" class="form-control" required/>
+			  			<input type="password" name="password" class="form-control" required/>
 			  			@if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
